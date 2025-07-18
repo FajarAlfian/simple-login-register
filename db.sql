@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   `password` VARCHAR(64) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (username, email, `password`) VALUES
+('faan', 'faan@gmail.com', 'admin123');
