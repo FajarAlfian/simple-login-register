@@ -57,3 +57,4 @@ G:\Fajar\Bootcamp Taldio\14 juli\backend\obj\Debug\net9.0\backend.pdb
 G:\Fajar\Bootcamp Taldio\14 juli\backend\obj\Debug\net9.0\backend.genruntimeconfig.cache
 G:\Fajar\Bootcamp Taldio\14 juli\backend\obj\Debug\net9.0\ref\backend.dll
 G:\Fajar\Bootcamp Taldio\14 juli\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+G:\Fajar\Bootcamp Taldio\14 juli\backend\obj\Debug\net9.0\backend.sourcelink.json
