@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5239/api/Auth/login', {
+    axios.post('http://localhost:5239/api/Auth/login2', {
         email: form.email,
         password: form.password
       });

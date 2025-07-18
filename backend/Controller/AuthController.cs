@@ -3,7 +3,8 @@ using TesApi.Data;
 using TesApi.Models;
 using BCrypt.Net;
 
-namespace TesApi.Controllers {
+namespace TesApi.Controllers
+{
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
@@ -39,20 +40,41 @@ namespace TesApi.Controllers {
             await _repo.AddUserAsync(newUser);
             return Created(string.Empty, new { message = "User registered successfully" });
         }
-        
-        //Untuk login
-          [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDto dto) {
-            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password)) {
+
+        //Untuk login jika ada register dengan bcrypt
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+            {
                 return BadRequest(new { message = "Email dan password diperlukan" });
             }
 
             var user = await _repo.GetByEmailAsync(dto.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password)) {
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+            {
                 return Unauthorized(new { message = "Email atau password salah" });
             }
 
             return Ok(new { message = "Login berhasil", user = new { user.Id, user.Username, user.Email } });
+        }
+
+        //untuk login jika disuruh langsung buat halaman login dan data di insert manual
+        [HttpPost("login2")]
+        public async Task<IActionResult> Login2([FromBody] LoginRequestDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest(new { message = "Email dan password diperlukan" });
+
+            var user = await _repo.GetByEmailAsync(dto.Email);
+            if (user == null || dto.Password != user.Password)
+                return Unauthorized(new { message = "Email atau password salah" });
+
+            return Ok(new
+            {
+                message = "Login berhasil",
+                user = new { user.Id, user.Username, user.Email }
+            });
         }
     }
 }
